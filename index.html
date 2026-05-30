@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPK SMPN 201 Jakarta</title>
+    <style>
+        /* Pengaturan Dasar & Font */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        /* Navigasi */
+        header {
+            background-color: #003366; /* Warna biru elegan khas sekolah */
+            color: white;
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.logo-container img {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    background-color: white;
+    padding: 2px;
+}
+        header h1 {
+            font-size: 1.5rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+        }
+        nav a:hover {
+            color: #ffd700;
+        }
+
+        /* Hero Banner */
+        .hero {
+            background: linear-gradient(rgba(0, 51, 102, 0.8), rgba(0, 51, 102, 0.8)), url('https://via.placeholder.com/1200x600?text=Foto+Sekolah/Kegiatan') center/cover;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #ffd700;
+            color: #003366;
+            padding: 10px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background-color: #ffc107;
+        }
+
+        /* Kontainer Utama per Bagian */
+        section {
+            padding: 60px 20px;
+            max-width: 1000px;
+            margin: auto;
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        h3 {
+            color: #003366;
+            border-bottom: 2px solid #ffd700;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Tata Letak Grid (Kartu) */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: #f1f5f9;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #003366;
+        }
+
+        /* Formulir */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        button[type="submit"] {
+            background-color: #003366;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button[type="submit"]:hover {
+            background-color: #002244;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        /* Responsif untuk HP */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 10px;
+            }
+            nav a {
+                margin: 0 10px;
+                font-size: 0.9rem;
+            }
+        }
+        .back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ffd700;
+    color: #003366;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 45px;
+    font-size: 1.3rem;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 999;
+}
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+.back-to-top:hover {
+    background-color: #003366;
+    color: #ffd700;
+}
+    </style>
+</head>
+  <script>
+        function bacaSelengkapnya() {
+            var teksTersembunyi = document.getElementById("teks-panjang");
+            var tombol = document.getElementById("tombol-selengkapnya");
+
+            // Jika teks sedang sembunyi, tampilkan teks dan ubah tulisan tombol
+            if (teksTersembunyi.style.display === "none") {
+                teksTersembunyi.style.display = "inline";
+                tombol.innerHTML = "[Sembunyikan]";
+            } else {
+                // Jika teks sedang tampil, sembunyikan kembali
+                teksTersembunyi.style.display = "none";
+                tombol.innerHTML = "[Baca Selengkapnya]";
+            }
+        } 
+        window.addEventListener('scroll', function() {
+    var btn = document.getElementById('backToTop');
+    // Jika layar di-scroll ke bawah lebih dari 300px, tombol muncul
+    if (window.scrollY > 300) {
+        btn.classList.add('show');
+    } else {
+        btn.classList.remove('show');
+    }
+});
+
+    </script>
+
+<body>
+
+    <header>
+    <div class="logo-container">
+        <img src="https://i.ibb.co.com/3mmHqxBd/b06e3528-598b-464b-9a0a-f6cab7f75b15-20260311-005542-0000.png" alt="Logo MPK SMPN 201">
+        <h1>MPK SMPN 201 Jakarta</h1>
+    </div>
+    <nav>
+        <a href="#beranda">Beranda</a>
+        <a href="#profil">Tentang Kami</a>
+        <a href="#program">Program</a>
+        <a href="#aspirasi">Aspirasi</a>
+        <a href="#publik">Ruang Publik</a>
+        <a href="#kontak">Kontak</a>
+    </nav>
+</header>
+
+    <div id="beranda" class="hero">
+        <h2>Saya Bisa, Kamu Bisa, Kita semua pasti bisa!</h2>
+        <p>Selamat datang di portal resmi Majelis Perwakilan Kelas (MPK) SMPN 201 Jakarta. Kami hadir sebagai jembatan aspirasimu.</p>
+        <a href="#aspirasi" class="btn">Sampaikan Aspirasimu Sekarang!</a>
+    </div>
+
+    <section>
+        <h3>Sambutan Ketua MPK</h3>
+        <p><em>"Halo, rekan-rekan siswa! Bagi kami, setiap suara dan gagasan yang kalian miliki adalah kunci untuk menciptakan lingkungan sekolah yang lebih baik. MPK hadir bukan sekadar sebagai pengawas, melainkan sebagai mitra, pendengar, dan perwakilan dari setiap kelas. Mari bersama-sama kita wujudkan program-program yang berdampak positif dan membangun lingkungan sekolah yang disiplin, kreatif, dan berwawasan lingkungan. Jangan ragu untuk bersuara, karena suaramu adalah arah gerak kami!"</em></p>
+        <p style="text-align: right; margin-top: 10px;"><strong>- Aditya Farizky, Ketua MPK</strong></p>
+    </section>
+
+    <section>
+        <h3>Highlight Kinerja</h3>
+        <div class="grid-3">
+            <div class="card">
+                <h4>🌿 Sekolah Bebas Plastik</h4>
+                <p>Peluncuran Kebijakan Sekolah Bebas Plastik. Mari dukung penggunaan wadah makan dan minum yang dapat dipakai ulang!</p>
+            </div>
+            <div class="card">
+                <h4>🎓 Pelepasan Kelas 9</h4>
+                <p>Mengawal jalannya acara perpisahan yang berkesan untuk kakak-kakak kelas 9.</p>
+            </div>
+            <div class="card">
+                <h4>🏆 Classmeeting Semester 2</h4>
+                <p>Persiapan ajang unjuk bakat dan sportivitas antar kelas yang seru dan kompetitif!</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="profil">
+        <h3>Mengenal Lebih Dekat Wakil Suaramu</h3>
+        <p><strong>Filosofi:</strong> MPK (Majelis Perwakilan Kelas) adalah lembaga legislatif tertinggi di tingkat siswa yang berkedudukan sejajar dengan OSIS. Kami bertugas memastikan roda keorganisasian sekolah berjalan sesuai dengan kebutuhan siswa dan aturan yang berlaku.</p>
+        <br>
+        <p><strong>Visi:</strong> Menjadikan MPK SMPN 201 Jakarta sebagai lembaga legislatif siswa yang "HEBAT" (Harmonis, Edukatif, Berwawasan Lingkungan, Amanah, dan Transparan) demi kemajuan sekolah.</p>
+        <br>
+        <p><strong>Misi:</strong></p>
+        <ol style="margin-left: 20px;">
+            <li>Menampung dan menindaklanjuti aspirasi siswa secara efektif dan efisien.</li>
+            <li>Melaksanakan fungsi pengawasan terhadap kinerja OSIS secara objektif dan berkala.</li>
+            <li>Menggodok dan menetapkan peraturan/kebijakan keorganisasian siswa yang relevan.</li>
+        </ol>
+                <br>
+        <div style="background-color: #003366; color: white; padding: 20px; border-radius: 8px; margin-bottom: 25px; border-left: 5px solid #ffd700; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <h4 style="color: #ffd700; margin-bottom: 12px; font-size: 1.2rem;">🌊 Arti Nama: Pancaran Samudera Wisesa</h4>
+            <p style="font-size: 0.95rem; margin-bottom: 8px;"><strong>"Pancaran Samudera"</strong> melambangkan luasnya cakupan perwakilan dan pengaruh yang menyebar ke seluruh penjuru SMP Negeri 201 Jakarta.</p>
+            <p style="font-size: 0.95rem; margin-bottom: 8px;"><strong>"Wisesa"</strong> berasal dari bahasa Jawa Kuno yang berarti kekuasaan atau kebijaksanaan.</p>
+            <p style="font-size: 0.95rem; font-style: italic; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 8px; margin-top: 12px; color: #f1f5f9;">
+                Secara keseluruhan, nama ini memiliki arti filosofis sebagai organisasi yang memiliki pengaruh luas dan mendalam yang didasari oleh kebijaksanaan serta otoritas luhur.
+            </p>
+        </div>
+
+        <h4>Komponen & Filosofi Logo:</h4>
+        <div class="grid-3" style="margin-top: 15px; margin-bottom: 20px;">
+            
+            <div class="card" style="background-color: #f8fafc; border-left: 4px solid #003366;">
+                <h5 style="color: #003366; margin-bottom: 5px; font-size: 1rem;">🛑 Bentuk Segi Delapan</h5>
+                <p style="font-size: 0.85rem; color: #555; line-height: 1.5;">Melambangkan keseimbangan dan kesempurnaan serta merefleksikan delapan penjuru mata angin, diartikan sebagai perwakilan yang mencakup seluruh siswa dan aspek di SMPN 201 Jakarta.</p>
+            </div>
+            
+            <div class="card" style="background-color: #f8fafc; border-left: 4px solid #ffd700;">
+                <h5 style="color: #b39200; margin-bottom: 5px; font-size: 1rem;">⚖️ Timbangan Keadilan</h5>
+                <p style="font-size: 0.85rem; color: #555; line-height: 1.5;">Melambangkan keadilan, kejujuran, dan objektivitas. Menunjukkan MPK berfungsi sebagai penengah yang adil, menyeimbangkan kepentingan siswa, dan memastikan semua suara didengar secara seimbang.</p>
+            </div>
+            
+            <div class="card" style="background-color: #f8fafc; border-left: 4px solid #003366;">
+                <h5 style="color: #003366; margin-bottom: 5px; font-size: 1rem;">📖 Buku Terbuka</h5>
+                <p style="font-size: 0.85rem; color: #555; line-height: 1.5;">Menyampaikan pesan luhur bahwa keadilan sejati hanya bisa ditegakkan jika didasari oleh fondasi ilmu pengetahuan, kebijaksanaan, dan kepatuhan penuh pada peraturan.</p>
+            </div>
+
+            <div class="card" style="background-color: #f8fafc; border-left: 4px solid #ffd700;">
+                <h5 style="color: #b39200; margin-bottom: 5px; font-size: 1rem;">⭐ Bintang Emas</h5>
+                <p style="font-size: 0.85rem; color: #555; line-height: 1.5;">Simbol dari cita-cita luhur, ketuhanan, dan kebijaksanaan. Letaknya di atas timbangan menegaskan bahwa setiap tindakan dan keputusan MPK didasarkan pada nilai moral tinggi dan kebenaran.</p>
+            </div>
+
+            <div class="card" style="background-color: #f8fafc; border-left: 4px solid #003366;">
+                <h5 style="color: #003366; margin-bottom: 5px; font-size: 1rem;">🌾 Padi dan Kapas</h5>
+                <p style="font-size: 0.85rem; color: #555; line-height: 1.5;">Simbol dari keadilan sosial dan kemakmuran. Kehadirannya menunjukkan tekad MPK untuk mewujudkan keadilan serta kesejahteraan bagi seluruh siswa tanpa memandang perbedaan.</p>
+            </div>
+
+            <div class="card" style="background-color: #f8fafc; border-left: 4px solid #ffd700;">
+                <h5 style="color: #b39200; margin-bottom: 5px; font-size: 1rem;">✍️ Lingkaran Identitas</h5>
+                <p style="font-size: 0.85rem; color: #555; line-height: 1.5;">Tulisan "Majelis Perwakilan Kelas" dan "SMPN 201 Jakarta" mempertegas fungsi resmi organisasi sebagai badan legislatif perwakilan siswa yang mengikat pada institusi sekolah.</p>
+            </div>
+
+            <div class="card" style="background-color: #f8fafc; border-left: 4px solid #003366;">
+                <h5 style="color: #003366; margin-bottom: 5px; font-size: 1rem;">🟡 Lingkaran Kuning</h5>
+                <p style="font-size: 0.85rem; color: #555; line-height: 1.5;">Melambangkan persatuan, keutuhan, dan kesempurnaan elemen sekolah (siswa, guru, staf) yang selalu bergerak dengan penuh keceriaan, optimisme, dan semangat baru.</p>
+            </div>
+
+            <div class="card" style="background-color: #f8fafc; border-left: 4px solid #ffd700;">
+                <h5 style="color: #b39200; margin-bottom: 5px; font-size: 1rem;">🔷 Warna Biru Tua</h5>
+                <p style="font-size: 0.85rem; color: #555; line-height: 1.5;">Merefleksikan karakter utama MPK sebagai organisasi yang kokoh, stabil, bijaksana, dan sepenuhnya dapat dipercaya dalam menjalankan amanat dari perwakilan siswa.</p>
+            </div>
+
+                        <div class="card" style="background-color: #f8fafc; border-left: 4px solid #003366;">
+                <h5 style="color: #003366; margin-bottom: 5px; font-size: 1rem;">🌊 Ombak Biru</h5>
+                <p style="font-size: 0.85rem; color: #555; line-height: 1.5;">Melambangkan keberlanjutan, dinamika pergerakan, dan konsistensi perjuangan roda organisasi MPK SMP Negeri 201 Jakarta yang tidak akan pernah padam dari masa ke masa.</p>
+            </div>
+        </div> <div style="text-align: center; margin-top: 40px; margin-bottom: 20px; width: 100%; display: block; clear: both;">
+            
+            <p style="font-size: 0.9rem; color: #666; font-weight: 500; display: inline-block; max-width: 280px; margin: 0 auto; line-height: 1.4;">
+                Lambang Resmi Majelis Perwakilan Kelas (MPK) SMP Negeri 201 Jakarta
+               <br>
+               <br>
+                Pancaran Samudera Wisesa
+            </p>
+       
+        </div>
+
+
+        <br>
+        <h4>Struktur Pengurus Harian MPK (Periode 2025-2026):</h4>
+        <ul style="margin-left: 20px; margin-top: 10px;">
+            <li><strong>Ketua:</strong> Aditya Farizky</li>
+            <li><strong>Wakil Ketua:</strong> Felicia Micheals</li>
+            <li><strong>Sekretaris 1:</strong> Muhammad Jevan Khadafi</li>
+            <li><strong>Sekretaris 2:</strong> Adelia Khalisa Balqis</li>
+            <li><strong>Bendahara:</strong> Samaria Tritajaya</li>
+            <li><strong>Hubungan Masyarakat:</strong> Gerson Pratama Simanulang</li>
+        </ul>
+                <br>
+        <h4>Ketua MPK dari Masa ke Masa:</h4>
+        <ul style="list-style-type: none; padding-left: 0; margin-top: 10px;">
+            <li style="padding: 8px 10px; background-color: #f1f5f9; margin-bottom: 5px; border-radius: 5px; border-left: 3px solid #ffd700;">
+                ⏳ <strong>Periode 2025-2026:</strong> Aditya Farizky
+            </li>
+            <li style="padding: 8px 10px; background-color: #f1f5f9; margin-bottom: 5px; border-radius: 5px; border-left: 3px solid #ccc;">
+                ⏳ <strong>Periode 2024-2025:</strong> Syabania Izkha Nurrahmah
+            </li>
+            <li style="padding: 8px 10px; background-color: #f1f5f9; margin-bottom: 5px; border-radius: 5px; border-left: 3px solid #ccc;">
+                ⏳ <strong>Periode 2023-2024:</strong> Wahyu Eka Wulandari
+            </li>
+            
+            <li style="padding: 8px 10px; background-color: #f1f5f9; margin-bottom: 5px; border-radius: 5px; border-left: 3px solid #ccc;">
+                ⏳ <strong>Periode 2022-2023:</strong> Alifia Zaskia Wibowo
+                </li>
+                <li style="padding: 8px 10px; background-color: #f1f5f9; margin-bottom: 5px; border-radius: 5px; border-left: 3px solid #ccc;">
+                ⏳ <strong>Periode 2021-2022:</strong> Hardelya Ika Putri
+            </li>
+        </ul>
+
+    </section>
+
+    <section id="program">
+        <h3>Aksi dan Dedikasi Kami untuk Sekolah</h3>
+        <p>Berikut adalah agenda utama yang menjadi fokus kerja kami:</p>
+        <ol style="margin-left: 20px; margin-top: 10px; margin-bottom: 20px;">
+            <li><strong>Pemilihan Pengurus OSIS dan MPK Periode 2026-2027:</strong> Mengawal jalannya pesta demokrasi siswa.</li>
+            <li><strong>Latihan Kepemimpinan Dasar Siswa (LKDS):</strong> Membentuk karakter dan kapasitas keorganisasian calon pengurus.</li>
+            <li><strong>Pelantikan OSIS dan MPK:</strong> Meresmikan estafet kepemimpinan baru secara formal.</li>
+            <li><strong>Sidang Pertanggungjawaban OSIS:</strong> Melakukan evaluasi mendalam di akhir masa jabatan.</li>
+        </ol>
+        <a href="https://docs.google.com/spreadsheets/d/1Mxe691DLhIeBWRHXljltMLawkc0XR5Vf/edit?usp=drivesdk&ouid=103979734356081544344&rtpof=true&sd=true" target="_blank" class="btn" style="background-color: #eee; color: #333;">Lihat Daftar Program OSIS & MPK Periode 2025-2026</a>
+    </section>
+
+   <!-- 4. Layanan Aspirasi -->
+    <section id="aspirasi">
+        <h3>Suaramu Menentukan Arah Sekolah!</h3>
+        <p style="margin-bottom: 20px;">Ada fasilitas yang perlu diperbaiki? Punya ide acara seru? Atau ada masukan tentang tata tertib sekolah? Sampaikan semuanya di sini. Semua aspirasi yang masuk akan dibahas dalam rapat rutin.</p>
+        
+        <!-- Script & Iframe Rahasia agar halaman tidak pindah/reload ke halaman Google Form yang putih -->
+        <script type="text/javascript">var submitted=false;</script>
+        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" 
+                onload="if(submitted) { alert('Aspirasi berhasil dikirim! Terima kasih atas suaramu.'); window.location.reload(); }">
+        </iframe>
+
+        <!-- GANTI URL ACTION DI BAWAH INI DENGAN URL GOOGLE FORM KAMU (YANG BERAKHIRAN /formResponse) -->
+        <form action="https://docs.google.com/forms/d/e/1FAIpQLSfEfrBHXnox7CsAYuSHnVgMkFVSqjReKc9m_Dm9uw-AWd0yaA//formResponse" 
+              method="POST" 
+              target="hidden_iframe" 
+              onsubmit="submitted=true;">
+            
+            <!-- GANTI name="entry.XXXXXXXXX" SESUAI DENGAN ID ENTRY FORM KAMU -->
+            <label for="nama">Nama Lengkap (Kosongkan jika ingin anonim):</label>
+            <input type="text" id="nama" name="entry.1684840577" placeholder="Masukkan nama kamu...">
+            
+            <label for="kelas">Kelas:</label>
+            <select id="kelas" name="entry.1133186373">
+                <option value="">-- Pilih Kelas --</option>
+                <option value="Kelas 7">Kelas 7</option>
+                <option value="Kelas 8">Kelas 8</option>
+                <option value="Kelas 9">Kelas 9</option>
+            </select>
+            
+            <label for="kategori">Kategori Aspirasi:</label>
+            <select id="kategori" name="entry.440684999">
+                <option value="Fasilitas Sekolah">Fasilitas Sekolah</option>
+                <option value="Program Kerja OSIS">Program Kerja OSIS</option>
+                <option value="Tata Tertib & Peraturan">Tata Tertib & Peraturan</option>
+                <option value="Lingkungan & Kebersihan">Lingkungan & Kebersihan</option>
+                <option value="Lainnya">Lainnya</option>
+            </select>
+            
+            <label for="pesan">Tuliskan Aspirasimu:</label>
+            <textarea id="pesan" name="entry.1516477125" rows="5" placeholder="Jelaskan aspirasi, keluhan, atau idemu secara rinci dan sopan..." required></textarea>
+            
+            <button type="submit">Kirim Aspirasi</button>
+        </form>
+    </section>
+
+      
+             <section id="publik">
+        <h3>Jendela Informasi dan Dokumentasi</h3>
+        
+        <div class="card" style="margin-bottom: 20px;">
+            <h4>Rangkaian Pemilihan Pengurus OSIS & MPK Segera Dimulai!</h4>
+            <p>
+                Persiapkan dirimu untuk menjadi bagian dari perubahan. MPK SMPN 201 Jakarta akan segera menggelar rangkaian seleksi dan pemilihan pengurus baru untuk periode 2026-2027.
+                
+                <span id="teks-panjang" style="display: none;">
+                    Rangkaian acara akan dimulai dari sosialisasi di lapangan sekolah,test tertulis,tes fisik,wawancara bersama pembina dan yang terakhir penentuan. Pastikan kamu mempersiapkan visi misi terbaikmu untuk membawa organisasi kita menjadi lebih HEBAT!
+                </span>
+                
+                <a href="javascript:void(0);" id="tombol-selengkapnya" onclick="bacaSelengkapnya()" style="color: #003366; text-decoration: none; font-weight: bold; margin-left: 5px;">
+                    [Baca Selengkapnya]
+                </a>
+            </p>
+        </div>
+
+        <h4>Pusat Data & Unduhan</h4>
+        <ul style="margin-left: 20px; margin-bottom: 20px;">
+            <li><a href="#">Unduh Tata Tertib Organisasi</a></li>
+            <li><a href="#">Unduh Format Laporan Perwakilan Kelas</a></li>
+        </ul>
+    </section>
+                </span>
+                
+                <a href="javascript:void(0);" id="tombol-selengkapnya" onclick="bacaSelengkapnya()" style="color: #003366; text-decoration: none; font-weight: bold; margin-left: 5px;">
+                    [Baca Selengkapnya]
+                </a>
+            </p>
+        </div>
+        <h4>Pusat Data & Unduhan</h4>
+        <ul style="margin-left: 20px; margin-bottom: 20px;">
+            <li><a href="https://drive.google.com/file/d/1JY4URP-ONDodTE9S5dHzGv530yRCV4mZ/view?usp=drivesdk" target="_blank">Unduh AD/ART MPK 201</a></li>
+            <li><a href="https://drive.google.com/file/d/1h0l-4SPp9tAQ2CKR_0rfWBd9Gi4dxYOV/view?usp=drivesdk" target="_blank">Unduh Struktur OSIS Periode 2025-2026</a></li>
+            <li><a href="https://drive.google.com/file/d/1F6cWS1PWQfHHC7glwcqQhmes0RcOhsPJ/view?usp=drivesdk" target="_blank">Unduh Stuktur MPK Periode 2025-2026</a></li>
+        </ul>
+    </section>
+
+    <section id="kontak">
+        <h3>Hubungi Kami</h3>
+        <p style="margin-bottom: 20px;">Butuh informasi lebih lanjut atau ingin berdiskusi langsung dengan pengurus MPK? Jangan ragu untuk menghubungi kami melalui kanal resmi atau kunjungi ruang kesekretariatan.</p>
+        
+        <ul style="list-style-type: none; margin-bottom: 20px;">
+            <li>📍 <strong>Lokasi Sekretariat:</strong> Pojok Kanan ruang Lantai 3</li>
+            <li>✉️ <strong>Email Resmi:</strong> smpn.201jakarta@email.com</li>
+            <li>⏰ <strong>Jam Operasional:</strong> Istirahat Pertama & Pulang Sekolah (Senin - Jumat)</li>
+        </ul>
+
+        <h4>Media Sosial</h4>
+        <ul style="list-style-type: none; margin-bottom: 20px;">
+            <li>📱 <strong>Instagram:</strong> <a href="https://instagram.com/osis.mpk.smpn201jakarta" target="_blank">@osis.mpk.smpn201jakarta</a></li>
+            <li>🎵 <strong>TikTok:</strong> <a href="https://tiktok.com/@osis/mpk.smpn201jakarta" target="_blank">@smpnegeri201jakarta</a></li>
+        </ul>
+
+        <h4>FAQ (Pertanyaan Umum):</h4>
+        <p><strong>T: Apa bedanya MPK dan OSIS?</strong></p>
+        <p>J: OSIS bertugas sebagai eksekutor yang menjalankan kegiatan, sedangkan MPK bertugas sebagai wakil siswa yang menyerap aspirasi dan mengawasi kinerja OSIS.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Majelis Perwakilan Kelas SMPN 201 Jakarta. All rights reserved.</p>
+    </footer>
+    
+<a href="#beranda" class="back-to-top" id="backToTop">▲</a>
+</body>
+</html>
